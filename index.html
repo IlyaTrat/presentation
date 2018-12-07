@@ -12,6 +12,9 @@
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
 
+		<!-- This presentation css -->
+		<link rel="stylesheet" href="css/presentation.css">
+
 		<!-- Printing and PDF exports -->
 		<script>
 			var link = document.createElement( 'link' );
@@ -24,8 +27,220 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>
+					<h1>TypeScript</h1>
+					<span class="fragment fade-in">short introduction</span>
+				</section>
+
+				<section>
+					<section>
+						<h2>What is TypeScript ?</h2>
+						<p class="fragment fade-in">It is a strict syntactical superset of JavaScript, and adds optional static typing to the language.</p>
+					</section>
+					<section>
+						<h2>Who developed ?</h2>
+						<p class="fragment fade-in">microsoft</p>
+						<p class="fragment fade-in"> but it's open source</p>
+					</section>
+					<section>
+						<h2>Why did they developed TS ?</h2>
+						<p class="fragment fade-in">while developing VSC they felt that they start more and more time spend on understanding and maintaining code than writing new one</p>
+					</section>
+					<section>
+						<h2>Why we want TS ?</h2>
+						<ul>
+							<li class="fragment fade-in">It scales</li>
+							<li class="fragment fade-in">"Feature gap" not so big</li>
+							<li class="fragment fade-in">Self documentation</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Basic types</h2>
+						<ul>
+							<li>Boolean</li>
+							<li>Number</li>
+							<li>String</li>
+							<li>Array</li>
+							<li>Tuple</li>
+							<li>Enum</li>
+							<li>Any</li>
+							<li>Void</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Boolean</h2>
+						<pre><code data-trim data-noescape class="typescript">
+							let value = true; // type boolean set by default
+							let bool: boolean = false;
+						</code></pre>
+					</section>
+					<section>
+						<h2>Number</h2>
+						<pre><code data-trim data-noescape class="typescript">
+							let dec: numder = 7;
+							let hex: numder = 0xf0f;
+							let bin: numder = 0b1011;
+							let oct: numder = 0o723;
+						</code></pre>
+					</section>
+					<section>
+						<h2>String</h2>
+						<pre><code data-trim data-noescape class="typescript">
+							let name: string = "Ivan";
+							let city: string = 'Magadan';
+						</code></pre>
+					</section>
+					<section>
+						<h2>Array</h2>
+						<pre><code data-trim data-noescape class="typescript">
+							let numbers: numder[] = [0, 1, 2, 3, 4];
+							let words: string[] = ['word', 'word', 'word'];
+						</code></pre>
+					</section>
+					<section>
+						<h2>Tuple</h2>
+						<pre><code data-trim data-noescape class="typescript">
+							let data: [number, string];
+							data = [10, 'ten'];
+							data = ['10', 'ten']; // Error
+							data[3] = false; // Error, 'boolean' isn't 'number | string'
+							data[3] = 'word';
+							data[3] = 9;
+						</code></pre>
+					</section>
+					<section>
+						<h2>Enum</h2>
+						<pre><code data-trim data-noescape class="typescript">
+							enum stringNumber {Zero, One, Two, Three, Four};
+							let num: string = stringNumber[3];
+							console.log(num); // Displays 'Three'
+						</code></pre>
+					</section>
+					<section>
+						<h2>Any</h2>
+						<pre><code data-trim data-noescape class="typescript">
+							let data: any = true;
+							data = 'string';
+							data = 30;
+							let anyArray: any[] = [true, 'word', 42];
+						</code></pre>
+					</section>
+					<section>
+						<h2>Void</h2>
+						<pre><code data-trim data-noescape class="typescript">
+								let isUndefined: void = undefined;
+								let isNull: void = null;
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Functions</h2>
+						<pre><code data-trim data-noescape class="typescript">
+							function add(x: number, y: number): number {
+								return x + y;
+							}
+						</code></pre>
+					</section>
+					<section>
+						<h2>Optional and Default Parameters</h2>
+						<pre><code data-trim data-noescape class="typescript">
+							function buildName(firstName: string, lastName?: string) {
+								return lastName ? firstName + ' ' + lastName : firstName;
+							}
+							let res = buildName('Ivan'); // 'Ivan'
+							res = buildName('Ivan', 'Petrov'); // 'Ivan Petrov'
+						</code></pre>
+						<pre><code data-trim data-noescape class="typescript">
+							function buildName(firstName: string, lastName = 'Petrov') {
+								return firstName + ' ' + lastName;
+							}
+							let res = buildName('Ivan'); // 'Ivan Petrov'
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Interfaces</h2>
+						<p>
+							Basically this is template for object
+						</p>
+					</section>
+					<section>
+						<pre><code data-trim data-noescape class="typescript">
+							interface person {
+								firstName: string;
+								lastName: string;
+								readonly birthday: Date;
+								weight?: number;
+							}
+							
+							let ivan: person = {
+								firstName: 'Ivan',
+								lastName: 'Petrov',
+								birthday: new Date(1999, 11, 11)
+							}
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>TS compiler</h2>
+						<p>
+							This is what compiles your TypeScript code in to JavaScript.
+						</p>
+						<span class="fragment fade-in">That's it <span class="fragment fade-in">or not ?</span></span>
+					</section>
+					<section>
+						<h2>TSC options</h2>
+						<p>
+							<pre><code data-trim data-noescape class="node fragment fade-in">
+								tsc sandbox.ts 
+							</code></pre>
+							<span class="fragment fade-in">Will compile in sandbox.js</span>
+							<pre><code data-trim data-noescape class="node fragment fade-in">
+								tsc sandbox.ts --watch
+							</code></pre>
+							<span class="fragment fade-in">Will recompile every time sandbox.ts changes</span>
+							<pre><code data-trim data-noescape class="node fragment fade-in">
+								tsc --init
+							</code></pre>
+							<span class="fragment fade-in">Initializes a TypeScript project and creates a tsconfig.json file</span>
+						</p>
+					</section>
+					<section>
+						<h2>tsconfig.json</h2>
+						<p>
+							<span class="fragment fade-in">Allows you to config compiler</span>
+							<pre><code data-trim data-noescape class="node fragment fade-in">
+								{
+									"compilerOptions": {
+										"target": "es5", 
+										"module": "system",
+										"removeComments": true,
+										"outFile": "../../built/local/tsc.js"
+									},
+									"include": [
+										"src/**/*"
+									],
+									"exclude": [
+										"node_modules",
+										"**/*.spec.ts"
+									]
+								}
+							</code></pre>
+						</p>
+					</section>
+				</section>
+				<section>
+					<h2>To learn more about TypeScript read official documentation</h2>
+				</section>
 			</div>
 		</div>
 
