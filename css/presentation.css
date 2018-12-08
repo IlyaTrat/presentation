@@ -1,3 +1,7 @@
 .reveal .slides h1,.reveal .slides h2 {
   text-transform: none;
 }
+
+.reveal .slides code {
+  font-size: 14px;
+}
